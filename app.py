@@ -7,6 +7,9 @@ st.title("🍸 Portal de Gestión Operativa - Pisco Loco")
 
 tab1, tab2 = st.tabs(["📊 Simulador de Costos", "🤖 Diagnóstico Financiero con IA"])
 
+# ==========================================
+# PESTAÑA 1: SIMULADOR DE COSTOS
+# ==========================================
 with tab1:
     st.header("Simulador de Costos y Escala Operativa")
     costos_fijos = st.slider("Costos Fijos Mensuales ($ CLP)", 1000000, 10000000, 4000000, 250000)
@@ -22,6 +25,9 @@ with tab1:
     with col2:
         st.metric("Costo Medio por Botella", f"${costo_medio:,.0f} CLP")
 
+# ==========================================
+# PESTAÑA 2: DIAGNÓSTICO CON IA
+# ==========================================
 with tab2:
     st.header("Auditoría y Análisis de Gastos con IA")
     api_key = st.text_input("Ingresa tu API Key de Google AI Studio:", type="password")
