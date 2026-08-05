@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from google import genai
+import google.generativeai as genai
 
 st.set_page_config(page_title="Portal Pisco Loco", page_icon="🍸", layout="wide")
 st.title("🍸 Portal de Gestión Operativa - Pisco Loco")
@@ -35,7 +35,8 @@ with tab2:
         if st.button("🚀 Generar Diagnóstico Financiero"):
             with st.spinner("La IA está analizando los datos..."):
                 try:
-                    client = genai.Client(api_key=api_key)
+                    genai.configure(api_key=api_key)
+                    model = genai.GenerativeModel('gemini-1.5-flash')
                     datos_str = df.to_string(index=False)
 
                     prompt = f"""
@@ -52,10 +53,7 @@ with tab2:
                     4. Plan de acción de 3 pasos concretos para reducir costos sin afectar la calidad.
                     """
 
-                    response = client.models.generate_content(
-                        model='gemini-1.5-flash',
-                        contents=prompt,
-                    )
+                    response = model.generate_content(prompt)
                     st.subheader("💡 Diagnóstico Estratégico")
                     st.markdown(response.text)
                 except Exception as e:
